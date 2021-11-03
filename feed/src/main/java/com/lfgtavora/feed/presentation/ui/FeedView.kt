@@ -144,10 +144,10 @@ fun FeedCarrouselItem(movie: MovieDomain, onItemClick: (Int) -> Unit) {
             )
             VerticalSpacer.Xsmall()
             Row {
-                Ratings(4.0)
+                Ratings(movie.rating, Color.White)
                 HorizontalSpacer.Small()
                 Text(
-                    text = movie.releaseDate?.time.toString(),
+                    text = movie.releaseYear ?: "",
                     style = MaterialTheme.typography.caption,
                     color = Color.White
                 )
@@ -190,7 +190,7 @@ fun FeedItem(movie: MovieDomain, index: Int, onItemClick: (Int) -> Unit) {
             Column(modifier = Modifier.padding(horizontal = 8.dp)) {
                 Text(text = movie.title ?: "", style = MaterialTheme.typography.subtitle1)
                 VerticalSpacer.Xsmall()
-                Ratings(movie.rating)
+                Ratings(movie.rating, MaterialTheme.colors.onBackground, 0.5f)
             }
         }
     }
@@ -198,15 +198,20 @@ fun FeedItem(movie: MovieDomain, index: Int, onItemClick: (Int) -> Unit) {
 }
 
 @Composable
-fun Ratings(rating: Double) {
-    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.alpha(0.6f)) {
+fun Ratings(rating: Double, color: Color, alpha: Float = 1f) {
+    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.alpha(alpha)) {
         Icon(
             imageVector = Icons.Filled.Star,
             contentDescription = null,
+            tint = color,
             modifier = Modifier.size(12.dp),
         )
         HorizontalSpacer.Xsmall()
-        Text(text = rating.toString(), style = MaterialTheme.typography.caption)
+        Text(
+            text = rating.toString(),
+            style = MaterialTheme.typography.caption,
+            color = color
+        )
     }
 }
 
