@@ -1,0 +1,13 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "TrendingMovies"
+include ':app'
+include ':feed'
+include ':designsystem'
+include ':networking'
+include ':moviedetail'
