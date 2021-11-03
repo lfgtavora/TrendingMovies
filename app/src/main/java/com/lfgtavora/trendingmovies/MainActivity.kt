@@ -19,9 +19,6 @@ import org.koin.core.context.loadKoinModules
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var feedViewModel: FeedViewModel
-    private lateinit var movieDetailViewModel: MovieDetailViewModel
-
     private val injectKoinModules by lazy {
         loadKoinModules(FeedModule.modules)
         loadKoinModules(MovieDetailModule.modules)
@@ -32,21 +29,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         injectKoinModules
-        injectViewModules()
 
         setContent {
             val navController = rememberNavController()
             TrendingMoviesTheme(darkTheme = ThemeState.darkModeState) {
                 Surface(color = MaterialTheme.colors.background) {
-                    NavigationComponent(navController, feedViewModel, movieDetailViewModel)
+                    NavigationComponent(navController)
                 }
             }
         }
-    }
-
-    private fun injectViewModules() {
-        feedViewModel = getViewModel<FeedViewModel>()
-        movieDetailViewModel = getViewModel<MovieDetailViewModel>()
     }
 
 }

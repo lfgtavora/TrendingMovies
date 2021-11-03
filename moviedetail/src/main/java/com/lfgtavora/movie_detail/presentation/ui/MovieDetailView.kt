@@ -31,9 +31,11 @@ import com.lfgtavora.movie_detail.presentation.viewmodel.MovieDetailViewModel
 
 @Composable
 fun MovieDetailView(id: String, viewModel: MovieDetailViewModel) {
-    val movieDetailState = viewModel.movieDetailState.value
+    val movieDetailState by remember {
+        viewModel.movieDetailState
+    }
 
-    if (movieDetailState.movie == null || movieDetailState.movie.id != id)
+    if (movieDetailState.movie == null || movieDetailState.movie?.id != id)
         viewModel.getMovieDetail(id)
 
     if (movieDetailState.isLoading) {

@@ -11,7 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -37,7 +37,9 @@ import com.lfgtavora.feed.presentation.viewmodel.UiState
 @ExperimentalPagerApi
 @Composable
 fun FeedView(viewModel: FeedViewModel, onItemClick: (Int) -> Unit) {
-    val popularMoviesState = viewModel.popularMoviesState.value
+
+    val popularMoviesState by remember { viewModel.popularMoviesState }
+    val recentsMoviesState by remember { viewModel.recentsMoviesState }
     val lazyListState = rememberLazyListState()
 
     LazyColumn(state = lazyListState) {
@@ -45,7 +47,7 @@ fun FeedView(viewModel: FeedViewModel, onItemClick: (Int) -> Unit) {
             FeedTitle(stringResource(R.string.feed_title_lancamentos))
         }
         item {
-            FeedCarrousel(viewModel, onItemClick)
+            FeedCarrousel(recentsMoviesState, onItemClick)
         }
         item {
             FeedTitle(stringResource(R.string.feed_title_polular))
@@ -71,7 +73,6 @@ fun FeedView(viewModel: FeedViewModel, onItemClick: (Int) -> Unit) {
 
     }
 
-
 }
 
 @Composable
@@ -88,17 +89,17 @@ fun FeedTitle(title: String) {
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
 @Composable
-fun FeedCarrousel(viewModel: FeedViewModel, onItemClick: (Int) -> Unit) {
-    if (viewModel.recentsMoviesState.value.isLoading.not()) {
+fun FeedCarrousel(recentsMoviesState: UiState, onItemClick: (Int) -> Unit) {
+    if (recentsMoviesState.isLoading.not()) {
         val pagerState = rememberPagerState()
         HorizontalPager(
             state = pagerState,
-            count = viewModel.recentsMoviesState.value.items.size,
+            count = recentsMoviesState.items.size,
             contentPadding = PaddingValues(horizontal = 32.dp),
             itemSpacing = 16.dp,
             modifier = Modifier.height(180.dp)
         ) { page ->
-            FeedCarrouselItem(viewModel.recentsMoviesState.value.items[page], onItemClick)
+            FeedCarrouselItem(recentsMoviesState.items[page], onItemClick)
         }
     }
 }

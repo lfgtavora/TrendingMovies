@@ -13,13 +13,13 @@ import com.lfgtavora.feed.presentation.viewmodel.FeedViewModel
 import com.lfgtavora.movie_detail.presentation.viewmodel.MovieDetailViewModel
 import com.lfgtavora.trendingmovies.ui.screen.DetailScreen
 import com.lfgtavora.trendingmovies.ui.screen.HomeScreen
+import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 @ExperimentalMaterialApi
 @Composable
 fun NavigationComponent(
     navController: NavHostController,
-    feedViewModel: FeedViewModel,
-    movieDetailViewModel: MovieDetailViewModel,
 ) {
     NavHost(
         navController = navController,
@@ -27,14 +27,17 @@ fun NavigationComponent(
     ) {
 
         composable(Route.HOME.label) {
-            HomeScreen(navHostController = navController, feedViewModel = feedViewModel)
+            HomeScreen(
+                navHostController = navController,
+                feedViewModel = getViewModel<FeedViewModel>()
+            )
         }
         composable(Route.DETAILS.label + "/{id}") {
             it.arguments?.getString("id")?.let { id ->
                 DetailScreen(
                     id = id,
                     navHostController = navController,
-                    viewmodel = movieDetailViewModel
+                    viewmodel = getViewModel<MovieDetailViewModel>()
                 )
             }
         }

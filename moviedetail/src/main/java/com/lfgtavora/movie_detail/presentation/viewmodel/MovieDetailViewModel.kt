@@ -20,7 +20,7 @@ class MovieDetailViewModel(private val useCase: IMovieDetailUseCase) : ViewModel
 
     internal fun getMovieDetail(id: String) {
         viewModelScope.launch {
-            _movieDetailState.value = _movieDetailState.value.copy(isLoading = true)
+            _movieDetailState.value = _movieDetailState.value.copy(isLoading = true, error = null)
             useCase.getMovieDetail(id)
                 .catch { e ->
                     e.message
@@ -30,7 +30,8 @@ class MovieDetailViewModel(private val useCase: IMovieDetailUseCase) : ViewModel
                     )
                 }
                 .collect { movie ->
-                    _movieDetailState.value = _movieDetailState.value.copy(movie = movie, isLoading = false)
+                    _movieDetailState.value =
+                        _movieDetailState.value.copy(movie = movie, isLoading = false)
                 }
         }
     }
