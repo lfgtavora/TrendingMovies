@@ -48,6 +48,6 @@ private const val TIME_OUT = 60_000
 
     defaultRequest {
         header(HttpHeaders.ContentType, ContentType.Application.Json)
-        header(HttpHeaders.Authorization, "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5OWU5NWUyNDliZWNjZWNiMWYyYzVjYzBlYTZmNjYwZiIsInN1YiI6IjYxN2Q2ODEwMTc2YTk0MjlkOWQ4MjI2MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5syjpFwHZ3zQV0kWAnqtAUNUn-2lsgnM0BCFAcIio_8")
+        header(HttpHeaders.Authorization, "Bearer " + BuildConfig.TMDB_JWT_TOKEN)
     }
 }
