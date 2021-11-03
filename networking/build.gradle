@@ -20,7 +20,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 
-        buildConfigField("String", "TMDB_API_KEY", apikeyProperties['TMDB_API_KEY'])
+        buildConfigField("String", "TMDB_JWT_TOKEN", apikeyProperties['TMDB_JWT_TOKEN'])
 
     }
 
