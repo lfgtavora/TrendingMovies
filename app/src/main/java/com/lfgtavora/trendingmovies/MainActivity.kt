@@ -9,16 +9,9 @@ import androidx.compose.material.Surface
 import androidx.navigation.compose.rememberNavController
 import com.lfgtavora.designsystem.ThemeState
 import com.lfgtavora.designsystem.theme.TrendingMoviesTheme
-import com.lfgtavora.feed.core.di.FeedModule
-import com.lfgtavora.feed.presentation.viewmodel.FeedViewModel
-import com.lfgtavora.movie_detail.core.di.MovieDetailModule
-import com.lfgtavora.movie_detail.presentation.viewmodel.MovieDetailViewModel
 import com.lfgtavora.trendingmovies.navigation.NavigationComponent
-import org.koin.androidx.viewmodel.ext.android.getViewModel
-import org.koin.core.context.loadKoinModules
 
 class MainActivity : ComponentActivity() {
-
     @ExperimentalMaterialApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

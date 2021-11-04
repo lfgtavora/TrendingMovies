@@ -30,26 +30,26 @@ import com.lfgtavora.movie_detail.domain.model.MovieDetailDomain
 import com.lfgtavora.movie_detail.presentation.viewmodel.UiState
 
 @Composable
-fun MovieDetailView(movieDetailState: State<UiState>) {
-    val movieDetailStateRemember by remember {
-        movieDetailState
-    }
+fun MovieDetailView(movieDetailState: UiState, getMovieDetail: () -> Unit) {
 
-    if (movieDetailStateRemember.isLoading) {
+    if (!movieDetailState.isLoading && movieDetailState.error == null && movieDetailState.movie == null)
+        getMovieDetail()
+
+    if (movieDetailState.isLoading) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
     } else {
-        movieDetailStateRemember.movie?.let { movie ->
+        movieDetailState.movie?.let { movie ->
             Column(Modifier.verticalScroll(rememberScrollState())) {
-                Cover(movie.cover)
+                movie.cover?.let { Cover(it) }
                 Column(Modifier.padding(horizontal = 16.dp)) {
                     VerticalSpacer.Medium()
                     Metadata(movie)
                     VerticalSpacer.Medium()
                     Title(movie)
                     VerticalSpacer.Medium()
-                    Description(value = movie.description)
+                    Description(value = movie.description ?: "")
                 }
             }
         }

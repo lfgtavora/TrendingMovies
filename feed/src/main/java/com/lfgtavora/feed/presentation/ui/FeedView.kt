@@ -40,6 +40,7 @@ fun FeedView(viewModel: FeedViewModel, onItemClick: (Int) -> Unit) {
 
     val popularMoviesState by remember { viewModel.popularMoviesState }
     val recentsMoviesState by remember { viewModel.recentsMoviesState }
+
     val lazyListState = rememberLazyListState()
 
     LazyColumn(state = lazyListState) {
@@ -53,7 +54,7 @@ fun FeedView(viewModel: FeedViewModel, onItemClick: (Int) -> Unit) {
             FeedTitle(stringResource(R.string.feed_title_polular))
             if (popularMoviesState.isLoading || popularMoviesState.error != null)
                 RetryCard(isLoading = popularMoviesState.isLoading) {
-                    viewModel.getPopularMovies()
+                    //popularMoviesState.getPopularMovies()
                 }
         }
         if (popularMoviesState.items.isNotEmpty()) {

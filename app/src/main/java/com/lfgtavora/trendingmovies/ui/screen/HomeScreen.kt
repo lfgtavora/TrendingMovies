@@ -3,12 +3,14 @@ package com.lfgtavora.trendingmovies.ui.screen
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import com.lfgtavora.designsystem.ThemeState
 import com.lfgtavora.feed.presentation.ui.FeedView
 import com.lfgtavora.feed.presentation.viewmodel.FeedViewModel
+import com.lfgtavora.feed.presentation.viewmodel.UiState
 import com.lfgtavora.trendingmovies.R
 import com.lfgtavora.trendingmovies.navigation.Route
 

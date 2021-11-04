@@ -9,9 +9,11 @@ import com.lfgtavora.movie_detail.domain.model.MovieDetailDomain
 import com.lfgtavora.movie_detail.domain.repository.MovieDetailRepositoryImpl
 import com.lfgtavora.movie_detail.domain.usecase.IMovieDetailUseCase
 import com.lfgtavora.movie_detail.domain.usecase.MovieDetailUseCaseImpl
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MovieDetailViewModel(private val useCase: IMovieDetailUseCase) : ViewModel() {
 
@@ -20,7 +22,8 @@ class MovieDetailViewModel(private val useCase: IMovieDetailUseCase) : ViewModel
 
     fun getMovieDetail(id: String) {
         viewModelScope.launch {
-            _movieDetailState.value = _movieDetailState.value.copy(isLoading = true, error = null)
+            _movieDetailState.value =
+                _movieDetailState.value.copy(isLoading = true, error = null)
             useCase.getMovieDetail(id)
                 .catch { e ->
                     e.message
@@ -33,6 +36,8 @@ class MovieDetailViewModel(private val useCase: IMovieDetailUseCase) : ViewModel
                     _movieDetailState.value =
                         _movieDetailState.value.copy(movie = movie, isLoading = false)
                 }
+
+
         }
     }
 

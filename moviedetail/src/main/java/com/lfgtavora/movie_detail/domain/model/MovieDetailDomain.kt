@@ -3,11 +3,11 @@ package com.lfgtavora.movie_detail.domain.model
 data class MovieDetailDomain(
     val title: String,
     val id: String,
-    val description: String,
+    val description: String?,
     val releaseDate: CustomDate?,
-    val cover: String,
-    val poster: String,
-    val homepage: String,
+    val cover: String?,
+    val poster: String?,
+    val homepage: String?,
     val rating: Double,
     val originalTitle: String,
     val adult: Boolean,
@@ -27,7 +27,7 @@ data class Genre (
 )
 
 data class Company(
-    val id: Long,
-    val logo: String,
+    val id: Int,
+    val logo: String?,
     val name: String
 )

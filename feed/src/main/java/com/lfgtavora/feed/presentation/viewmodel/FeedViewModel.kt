@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lfgtavora.feed.domain.model.MovieDomain
 import com.lfgtavora.feed.domain.usecase.IMoviesUsecase
-import com.lfgtavora.feed.domain.usecase.MoviesUseCaseImpl
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
