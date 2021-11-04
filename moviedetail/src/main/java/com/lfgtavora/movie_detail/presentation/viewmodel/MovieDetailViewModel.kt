@@ -18,7 +18,7 @@ class MovieDetailViewModel(private val useCase: IMovieDetailUseCase) : ViewModel
     private val _movieDetailState = mutableStateOf(UiState())
     val movieDetailState: State<UiState> = _movieDetailState
 
-    internal fun getMovieDetail(id: String) {
+    fun getMovieDetail(id: String) {
         viewModelScope.launch {
             _movieDetailState.value = _movieDetailState.value.copy(isLoading = true, error = null)
             useCase.getMovieDetail(id)

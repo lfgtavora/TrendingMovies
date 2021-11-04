@@ -27,23 +27,20 @@ import coil.compose.rememberImagePainter
 import com.google.accompanist.flowlayout.FlowRow
 import com.lfgtavora.designsystem.utils.*
 import com.lfgtavora.movie_detail.domain.model.MovieDetailDomain
-import com.lfgtavora.movie_detail.presentation.viewmodel.MovieDetailViewModel
+import com.lfgtavora.movie_detail.presentation.viewmodel.UiState
 
 @Composable
-fun MovieDetailView(id: String, viewModel: MovieDetailViewModel) {
-    val movieDetailState by remember {
-        viewModel.movieDetailState
+fun MovieDetailView(movieDetailState: State<UiState>) {
+    val movieDetailStateRemember by remember {
+        movieDetailState
     }
 
-    if (movieDetailState.movie == null || movieDetailState.movie?.id != id)
-        viewModel.getMovieDetail(id)
-
-    if (movieDetailState.isLoading) {
+    if (movieDetailStateRemember.isLoading) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
     } else {
-        movieDetailState.movie?.let { movie ->
+        movieDetailStateRemember.movie?.let { movie ->
             Column(Modifier.verticalScroll(rememberScrollState())) {
                 Cover(movie.cover)
                 Column(Modifier.padding(horizontal = 16.dp)) {
