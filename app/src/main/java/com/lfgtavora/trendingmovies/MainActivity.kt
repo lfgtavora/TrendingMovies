@@ -19,16 +19,9 @@ import org.koin.core.context.loadKoinModules
 
 class MainActivity : ComponentActivity() {
 
-    private val injectKoinModules by lazy {
-        loadKoinModules(FeedModule.modules)
-        loadKoinModules(MovieDetailModule.modules)
-    }
-
     @ExperimentalMaterialApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        injectKoinModules
 
         setContent {
             val navController = rememberNavController()
