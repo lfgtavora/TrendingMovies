@@ -24,7 +24,6 @@ class MovieDetailViewModel(private val useCase: IMovieDetailUseCase) : ViewModel
                 _movieDetailState.value.copy(isLoading = true, error = null)
             useCase.getMovieDetail(id)
                 .catch { e ->
-                    e.message
                     _movieDetailState.value = _movieDetailState.value.copy(
                         error = UiState.Error.NetworkError,
                         isLoading = false

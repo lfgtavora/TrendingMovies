@@ -62,7 +62,7 @@ val ktorConfigurationModule = module {
                     }
 
                 }
-                level = LogLevel.ALL
+                level = LogLevel.NONE
             }
 
             install(ResponseObserver) {
