@@ -41,12 +41,14 @@ android {
 
 dependencies {
 
+    //KTOR + SERIALIZATION
     api "io.ktor:ktor-client-android:$ktor_version"
     api "io.ktor:ktor-client-serialization:$ktor_version"
     api "org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlin_serialization_version"
     api "io.ktor:ktor-client-logging-jvm:$ktor_version"
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    //DI
+    implementation "io.insert-koin:koin-android:$koin_version"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

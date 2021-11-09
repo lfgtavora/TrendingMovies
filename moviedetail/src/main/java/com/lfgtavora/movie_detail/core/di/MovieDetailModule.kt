@@ -6,6 +6,8 @@ import com.lfgtavora.movie_detail.domain.repository.MovieDetailRepositoryImpl
 import com.lfgtavora.movie_detail.domain.usecase.IMovieDetailUseCase
 import com.lfgtavora.movie_detail.domain.usecase.MovieDetailUseCaseImpl
 import com.lfgtavora.movie_detail.presentation.viewmodel.MovieDetailViewModel
+import com.lfgtavora.networking.di.ktorConfigurationModule
+import com.lfgtavora.networking.di.networkingKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -28,7 +30,8 @@ object MovieDetailModule {
         modules = listOf(
             useCaseModule,
             repositoryModule,
-            viewModelModule
+            viewModelModule,
+            ktorConfigurationModule
         )
         koin.unloadModules(modules)
         modules(modules)
@@ -45,7 +48,7 @@ val viewModelModule = module {
 }
 
 val repositoryModule = module {
-    single<MovieDetailRepositoryImpl> { MovieDetailRepositoryImpl(MovieDetailMapper()) }
+    single<MovieDetailRepositoryImpl> { MovieDetailRepositoryImpl(get(),MovieDetailMapper()) }
 }
 
 val useCaseModule = module {

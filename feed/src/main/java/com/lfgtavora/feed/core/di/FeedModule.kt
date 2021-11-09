@@ -7,6 +7,7 @@ import com.lfgtavora.feed.domain.repository.MoviesRepositoryImpl
 import com.lfgtavora.feed.domain.usecase.IMoviesUsecase
 import com.lfgtavora.feed.domain.usecase.MoviesUseCaseImpl
 import com.lfgtavora.feed.presentation.viewmodel.FeedViewModel
+import com.lfgtavora.networking.di.ktorConfigurationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -29,6 +30,7 @@ object FeedModule {
             viewModelModule,
             useCaseModule,
             repositoryModule,
+            ktorConfigurationModule
         )
         koin.unloadModules(modules)
         modules(modules)
@@ -46,7 +48,7 @@ val viewModelModule = module {
 }
 
 val repositoryModule = module {
-    single<IMovieRepository> { MoviesRepositoryImpl(MoviesMapper()) }
+    single<IMovieRepository> { MoviesRepositoryImpl(get(), MoviesMapper()) }
 }
 
 val useCaseModule = module {
