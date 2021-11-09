@@ -27,34 +27,50 @@ import coil.compose.rememberImagePainter
 import com.google.accompanist.flowlayout.FlowRow
 import com.lfgtavora.designsystem.utils.*
 import com.lfgtavora.movie_detail.domain.model.MovieDetailDomain
-import com.lfgtavora.movie_detail.presentation.viewmodel.UiState
+import com.lfgtavora.movie_detail.presentation.viewmodel.MovieDetailViewModel
 
 @Composable
-fun MovieDetailView(movieDetailState: UiState, getMovieDetail: () -> Unit) {
+fun MovieDetailState(id: String, viewModel: MovieDetailViewModel) {
+    val movieDetailState by remember {
+        viewModel.movieDetailState
+    }
 
-    if (!movieDetailState.isLoading && movieDetailState.error == null && movieDetailState.movie == null)
-        getMovieDetail()
+    if (viewModel.alreadyGotMovieDetail.value.not())
+        viewModel.getMovieDetail(id)
 
-    if (movieDetailState.isLoading) {
-        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator()
-        }
-    } else {
-        movieDetailState.movie?.let { movie ->
-            Column(Modifier.verticalScroll(rememberScrollState())) {
-                movie.cover?.let { Cover(it) }
-                Column(Modifier.padding(horizontal = 16.dp)) {
-                    VerticalSpacer.Medium()
-                    Metadata(movie)
-                    VerticalSpacer.Medium()
-                    Title(movie)
-                    VerticalSpacer.Medium()
-                    Description(value = movie.description ?: "")
-                }
-            }
+    if (movieDetailState.isLoading)
+        Loading()
+
+    movieDetailState.error?.let {
+        print(it)
+    }
+
+    movieDetailState.movie?.let {
+        MovieDetailView(it)
+    }
+}
+
+@Composable
+fun MovieDetailView(MovieDetail: MovieDetailDomain) {
+    Column(Modifier.verticalScroll(rememberScrollState())) {
+        MovieDetail.cover?.let { Cover(it) }
+        Column(Modifier.padding(horizontal = 16.dp)) {
+            VerticalSpacer.Medium()
+            Metadata(MovieDetail)
+            VerticalSpacer.Medium()
+            Title(MovieDetail)
+            VerticalSpacer.Medium()
+            Description(MovieDetail.description ?: "")
         }
     }
 
+}
+
+@Composable
+private fun Loading() {
+    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        CircularProgressIndicator()
+    }
 }
 
 @Composable

@@ -4,23 +4,21 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lfgtavora.movie_detail.data.mapper.MovieDetailMapper
 import com.lfgtavora.movie_detail.domain.model.MovieDetailDomain
-import com.lfgtavora.movie_detail.domain.repository.MovieDetailRepositoryImpl
 import com.lfgtavora.movie_detail.domain.usecase.IMovieDetailUseCase
-import com.lfgtavora.movie_detail.domain.usecase.MovieDetailUseCaseImpl
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MovieDetailViewModel(private val useCase: IMovieDetailUseCase) : ViewModel() {
 
     private val _movieDetailState = mutableStateOf(UiState())
     val movieDetailState: State<UiState> = _movieDetailState
 
+    internal val alreadyGotMovieDetail = mutableStateOf(false)
+
     fun getMovieDetail(id: String) {
+        alreadyGotMovieDetail.value = true
         viewModelScope.launch {
             _movieDetailState.value =
                 _movieDetailState.value.copy(isLoading = true, error = null)
