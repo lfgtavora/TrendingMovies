@@ -42,8 +42,3 @@ Responsável por organizar as Views e carregar lógica de items consumidas na p�
 - Filme randomico na Home.
 - Escrever testes unitários com Mockk.
 - Adicionar Placeholder (https://google.github.io/accompanist/placeholder/) para loadings mais semanticos.
-
-
-## :bug: Bugs em investigação
-
-- [Crítico] Recomposition do Compose está afetando a viewmodel chamada da API tela de detalhes, causando um looping infinito. Problema foi reportado por diversos usuários na thread do Koin: https://github.com/InsertKoinIO/koin/issues/1079
