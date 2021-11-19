@@ -1,4 +1,6 @@
-# TrendingMovies
+# TrendingMovies!
+
+<img src="https://user-images.githubusercontent.com/44548041/142545228-686b080e-da93-4e48-9f9d-3147a316452f.png" width="300"> <img src="https://user-images.githubusercontent.com/44548041/142543167-6dbaff62-0576-4e12-9ef2-2a5c881d16d9.png" width="300"> <img src="https://user-images.githubusercontent.com/44548041/142543193-01f8f9bf-2295-4d2c-aec0-587588e24152.png" width="300">
 
 ## :memo: Descrição
 
